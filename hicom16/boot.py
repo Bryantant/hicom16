@@ -9,9 +9,15 @@ APP_TITLE_OVERRIDES = {
 	"frappe": "Hicom Core",
 }
 
+# Replace app logos on the Desktop (Apps page) tiles and the sidebar app switcher.
+# Key = installed app_name, value = asset URL of the logo to display instead.
+APP_LOGO_OVERRIDES = {
+	"erpnext": "/assets/hicom16/images/hicom-system.png",
+}
+
 
 def boot_session(bootinfo):
-	"""Rewrite app titles in the workspace sidebar without touching core files.
+	"""Rewrite app titles and logos in the desk without touching core files.
 
 	Wired via the `extend_bootinfo` hook, which runs in frappe.sessions.get()
 	*after* frappe.boot.load_desktop_data has populated bootinfo.app_data, and
@@ -21,3 +27,6 @@ def boot_session(bootinfo):
 		new_title = APP_TITLE_OVERRIDES.get(app.get("app_name"))
 		if new_title:
 			app["app_title"] = new_title
+		new_logo = APP_LOGO_OVERRIDES.get(app.get("app_name"))
+		if new_logo:
+			app["app_logo_url"] = new_logo

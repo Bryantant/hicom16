@@ -30,3 +30,14 @@ input[type="checkbox"]:checked {
 	background: #4a2d9d !important;
 	border-color: #4a2d9d !important;
 }
+
+/* v16 renders page and dialog buttons as Espresso `.es-button` (no `.btn` class), coloured
+   through these variables, so the `.btn` rules above no longer reach Save, Submit, Actions
+   or dialog primaries. Red (danger) buttons keep their own theme. */
+.es-button:not([data-theme="red"]) {
+  --bt-solid-bg: #5c38b4;
+  --bt-solid-bg-hover: #4a2d9d;
+  --bt-solid-bg-active: #4a2d9d;
+  --bt-solid-fg: #ffffff;
+}
+
