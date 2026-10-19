@@ -81,3 +81,32 @@
 	// One-time "Try the new navigation" dialog linking to docs.frappe.io.
 	boot.show_new_navigation_prompt = false;
 })();
+
+// Hicom16: avatar menu on the apps screen (/desk). DesktopPage.setup_avatar hard-codes "About"
+// (frappe.io dialog) and "Frappe Support" (support.frappe.io) and builds its Dropdown in one go,
+// with no hook to drop rows. The "desktop_screen" event fires on the instance just before
+// setup_avatar runs, so wrap that call once and filter the rows handed to frappe.ui.Dropdown.
+$(document).on("desktop_screen", function (e, data) {
+	var desktop = data && data.desktop;
+	if (!desktop || desktop.__hicom_avatar_wrapped) return;
+	desktop.__hicom_avatar_wrapped = true;
+
+	var hidden = [__("About"), __("Frappe Support")];
+	var original = desktop.setup_avatar;
+	desktop.setup_avatar = function () {
+		var Dropdown = frappe.ui.Dropdown;
+		frappe.ui.Dropdown = function (opts) {
+			if (opts && Array.isArray(opts.options)) {
+				opts.options = opts.options.filter(function (row) {
+					return hidden.indexOf(row.label) === -1;
+				});
+			}
+			return new Dropdown(opts);
+		};
+		try {
+			return original.apply(this, arguments);
+		} finally {
+			frappe.ui.Dropdown = Dropdown;
+		}
+	};
+});
