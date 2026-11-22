@@ -49,6 +49,12 @@ PROPERTY_SETTERS = [
 	# already exist keep the value stored on them (2 unless changed).
 	("User", "simultaneous_sessions", "default", "1", "Text"),
 	("User", "simultaneous_sessions", "hidden", 1, "Check"),
+	# Item form: field help text that names the product ("ERPNext will make ...")
+	("Item", "is_stock_item", "description",
+	 "A stock ledger entry is made for each transaction of this item. Keep unchecked for non-stock or service items.",
+	 "Small Text"),
+	# Accounts Settings: help text that is only a link to the product documentation
+	("Accounts Settings", "enable_common_party_accounting", "description", "", "Small Text"),
 ]
 
 

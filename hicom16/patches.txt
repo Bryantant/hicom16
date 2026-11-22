@@ -7,3 +7,5 @@
 hicom16.patches.v16_0.hide_user_api_docs_link
 hicom16.patches.v16_0.apply_branding
 hicom16.patches.v16_0.apply_user_property_setters
+hicom16.patches.v16_0.apply_item_description_setter
+hicom16.patches.v16_0.apply_property_setters  # 2026-11-22 accounts settings help
