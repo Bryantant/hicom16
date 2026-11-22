@@ -89,7 +89,7 @@ extend_bootinfo = "hicom16.boot.boot_session"
 # ------------
 
 # before_install = "hicom16.install.before_install"
-# after_install = "hicom16.install.after_install"
+after_install = "hicom16.install.after_install"
 
 # Uninstallation
 # ------------
