@@ -3,6 +3,12 @@ button[aria-controls="toolbar-help"] {
 	display: none !important;
 }
 
+/* Hide the "Try the new Print Designer" promo link in the Print view toolbar */
+.inner-page-message a[href*="print-designer"],
+.inner-page-message a[href*="print_designer"] {
+	display: none !important;
+}
+
 /* ── Checkbox checked state ──────────────────────────────────── */
 input[type="checkbox"]:checked {
 	background-color: #5c38b4 !important;
