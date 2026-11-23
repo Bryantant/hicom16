@@ -87,8 +87,11 @@ def run():
 	import frappe
 
 	as_user("Administrator")
+	# an enabled role: a site that disabled unused roles (NG did) would otherwise hand the test profile a role that grants nothing
 	desk_role = next(
-		r for r in ("Sales User", "Stock User", "Accounts User", "Blogger") if frappe.db.exists("Role", r)
+		r
+		for r in ("Sales User", "Stock User", "Accounts User", "Blogger", "Asset Editor")
+		if frappe.db.exists("Role", {"name": r, "disabled": 0})
 	)
 	for name, role in zip(TEST_PROFILES, (desk_role, "System Manager"), strict=True):
 		frappe.get_doc({"doctype": "Role Profile", "role_profile": name, "roles": [{"role": role}]}).insert()
